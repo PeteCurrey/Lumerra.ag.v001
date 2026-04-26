@@ -1,26 +1,253 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ============================================================
+   LUMERRA — "QUIET LUMINANCE" DESIGN SYSTEM
+   Tailwind v4 CSS-first configuration
+   Updated April 2026 as per Master Spec
+   ============================================================ */
+
+@theme {
+  /* ── Surface — Paper-warm whites ───────────────────────── */
+  --color-paper: #FAF7F2;          /* Primary page background */
+  --color-paper-raised: #FFFFFF;   /* Cards, modals */
+  --color-paper-sunken: #F2EDE5;   /* Alternating sections */
+  --color-paper-deep: #E8E1D5;     /* Dividers, hover-lift */
+
+  /* ── Ink — Softened blacks ─────────────────────────────── */
+  --color-ink: #1A1A1A;            /* Body text, primary */
+  --color-ink-soft: #3D3D3D;       /* Headings on light */
+  --color-ink-muted: #6B6B6B;      /* Secondary, captions */
+  --color-ink-quiet: #9A958C;      /* Tertiary, metadata */
+  --color-ink-rule: #D4CFC7;       /* 1px dividers */
+
+  /* ── Accent — Warm Bronze ──────────────────────────────── */
+  --color-bronze: #8B6F47;         /* CTAs, links */
+  --color-bronze-deep: #6B5436;    /* Hover state */
+  --color-bronze-light: #B89A75;   /* Subtle accents */
+  --color-bronze-wash: #E8DCC9;    /* Tinted backgrounds */
+
+  /* ── Sub-brands — Water & Wood ─────────────────────────── */
+  --color-water-surface: #C9D8DC;
+  --color-water-deep: #7A8B91;
+  --color-wood-light: #D9C4A3;
+  --color-wood: #A8835A;
+  --color-wood-deep: #6B4F33;
+
+  /* ── Functional ─────────────────────────────────────────── */
+  --color-success: #3F7A5A;
+  --color-error: #A6422E;
+  --color-warn: #B5824A;
+
+  /* ── Ember Sub-brand — Charcoal & Stone ────────────────── */
+  --color-charcoal: #121212;
+  --color-charcoal-raised: #1E1E1E;
+  --color-stone: #C4C0BB;
+  --color-stone-warm: #A8A39D;
+  --color-ember-bronze: #D98C5F; /* More vibrant ember-like bronze */
+
+  /* ── Warmpath Sub-brand — Moss & Copper ────────────────── */
+  --color-moss: #3A4D39;
+  --color-moss-light: #739072;
+  --color-moss-wash: #ECEEED;
+  --color-copper: #B87333;
+  --color-copper-deep: #8B4513;
+  --color-technical-white: #FBFCFC;
+
+  /* ── Grove Sub-brand — Forest & Earth ──────────────────── */
+  --color-forest: #2C3327;
+  --color-forest-light: #4A5D3F;
+  --color-forest-wash: #F5F7F2;
+  --color-earth: #8D6B58;
+  --color-earth-deep: #5D463A;
+  --color-grove-stone: #D1CEC7;
+
+  /* ── Typography ─────────────────────────────────────────── */
+  --font-display: 'Canela', 'GT Sectra', 'Cormorant Garamond', serif;
+  --font-sans: 'Söhne', 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* ── Spacing Scale (Master Spec) ────────────────────────── */
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
+  --spacing-8: 32px;
+  --spacing-12: 48px;
+  --spacing-16: 64px;
+  --spacing-24: 96px;
+  --spacing-32: 128px;
+  --spacing-40: 160px;
+  --spacing-48: 192px;
+
+  /* ── Radius ──────────────────────────────────────────────── */
+  --radius-none: 0px;
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px; /* Sauna specific */
+
+  /* ── Transitions ─────────────────────────────────────────── */
+  --transition-cinematic: 700ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  /* ── Z-index ─────────────────────────────────────────────── */
+  --z-sticky: 200;
+  --z-overlay: 300;
+  --z-modal: 400;
+  --z-cursor: 9999;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ============================================================
+   BASE STYLES
+   ============================================================ */
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@media (hover: hover) and (pointer: fine) {
+  body {
+    cursor: none;
+  }
+  a, button, [role="button"] {
+    cursor: none;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+h1, h2, h3, h4, .display {
+  font-family: var(--font-display);
+  line-height: 1.05;
+  letter-spacing: -0.011em;
+  font-weight: 400;
+}
+
+/* ── Spec Sizing ─────────────────────────────────────────── */
+.display-96 { font-size: clamp(3.5rem, 8vw, 6rem); }
+.display-80 { font-size: clamp(3rem, 7vw, 5rem); }
+.display-64 { font-size: clamp(2.5rem, 5vw, 4rem); }
+.display-56 { font-size: clamp(2.25rem, 4.5vw, 3.5rem); }
+.display-48 { font-size: clamp(2rem, 4vw, 3rem); }
+
+.text-caption {
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+}
+
+/* ── Component Primitives ────────────────────────────────── */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  transition: all var(--transition-cinematic);
+  cursor: pointer;
+}
+
+.btn-bronze-underline {
+  position: relative;
+  color: var(--color-ink);
+  padding-bottom: 2px;
+}
+
+.btn-bronze-underline::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--color-bronze);
+  transition: width 0.4s ease;
+}
+
+.btn-bronze-underline:hover::after {
+  width: 100%;
+}
+
+.btn-primary {
+  background-color: var(--color-bronze);
+  color: var(--color-paper-raised);
+  padding: 12px 32px;
+  border-radius: var(--radius-none);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-bronze-deep);
+}
+
+.btn-outline {
+  border: 1px solid var(--color-ink-rule);
+  padding: 12px 32px;
+  border-radius: var(--radius-none);
+}
+
+.btn-outline:hover {
+  border-color: var(--color-ink);
+  background-color: var(--color-paper-sunken);
+}
+
+/* ── Layout Utilities ────────────────────────────────────── */
+
+.container-lumerra {
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: 80px;
+}
+
+@media (max-width: 1024px) {
+  .container-lumerra { padding-inline: 40px; }
+}
+
+@media (max-width: 640px) {
+  .container-lumerra { padding-inline: 20px; }
+}
+
+.section-padding {
+  padding-block: 96px;
+}
+
+.hero-padding {
+  padding-block: 160px;
+}
+
+/* ── Custom Cursor ───────────────────────────────────────── */
+
+.custom-cursor {
+  width: 6px;
+  height: 6px;
+  background-color: var(--color-bronze);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: var(--z-cursor);
+  transition: width 0.3s, height 0.3s, background-color 0.3s;
+}
+
+.custom-cursor.active {
+  width: 32px;
+  height: 32px;
+  background-color: transparent;
+  border: 1px solid var(--color-bronze);
+}
+
+/* ── GSAP Reveal Targets ─────────────────────────────────── */
+
+.clip-reveal {
+  clip-path: inset(100% 0 0 0);
+}
+
+.text-split-char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(24px);
 }
