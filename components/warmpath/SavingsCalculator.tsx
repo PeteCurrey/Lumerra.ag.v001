@@ -34,7 +34,7 @@ export function SavingsCalculator() {
     const fuelCosts: Record<string, number> = { gas: 0.08, oil: 0.12, electric: 0.28 };
     const ashpCost = 0.14; // Average kWh cost with CoP of 3.5
     
-    const currentCost = usage * fuelCosts[fuelType];
+    const currentCost = usage * (fuelCosts[fuelType] ?? 0);
     const newCost = usage * ashpCost;
     const savings = currentCost - newCost;
     const co2Saved = usage * 0.2; // kg per year

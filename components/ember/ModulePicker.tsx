@@ -2,19 +2,15 @@
 
 import { motion, Reorder } from 'framer-motion';
 import { Plus, Trash2, GripVertical, Flame, Refrigerator, Layout, Disc } from 'lucide-react';
+import { Module, ModuleType } from '@/lib/types';
 
-const MODULE_TYPES = [
+const MODULE_TYPES: { id: ModuleType, label: string, icon: any, price: number }[] = [
   { id: 'grill', label: 'Pro-Fire Grill', icon: Flame, price: 450000 },
   { id: 'prep', label: 'Preparation Station', icon: Layout, price: 120000 },
   { id: 'fridge', label: 'CoolZone Fridge', icon: Refrigerator, price: 280000 },
   { id: 'sink', label: 'Wet Station', icon: Disc, price: 180000 },
 ];
 
-interface Module {
-  id: string;
-  type: string;
-  position: number;
-}
 
 export function ModulePicker({ 
   modules, 
@@ -23,7 +19,7 @@ export function ModulePicker({
   onReorder
 }: { 
   modules: Module[], 
-  onAdd: (type: string) => void,
+  onAdd: (type: ModuleType) => void,
   onRemove: (id: string) => void,
   onReorder: (modules: Module[]) => void
 }) {

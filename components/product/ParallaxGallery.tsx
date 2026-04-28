@@ -28,7 +28,7 @@ export function ParallaxGallery({ productImage, backgroundImage }: ParallaxGalle
 
     layers.forEach((layer, i) => {
       gsap.to(layer, {
-        y: (i === 2 ? -100 : 100) * velocities[i], // Steam (index 2) moves upward
+        y: (i === 2 ? -100 : 100) * (velocities[i] ?? 0), // Steam (index 2) moves upward
         ease: "none",
         scrollTrigger: {
           trigger: containerRef.current,

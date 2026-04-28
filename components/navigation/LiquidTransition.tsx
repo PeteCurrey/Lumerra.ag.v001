@@ -21,7 +21,7 @@ export function LiquidTransition() {
 
     const startTransition = () => {
       setIsTransitioning(true);
-      const randomShape = BLOB_SHAPES[Math.floor(Math.random() * BLOB_SHAPES.length)];
+      const randomShape = (BLOB_SHAPES[Math.floor(Math.random() * BLOB_SHAPES.length)] || BLOB_SHAPES[0]) as string;
 
       const tl = gsap.timeline({
         onComplete: () => setIsTransitioning(false)

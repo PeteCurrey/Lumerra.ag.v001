@@ -68,13 +68,17 @@ function CausticPlane() {
   useFrame((state) => {
     if (meshRef.current) {
       const material = meshRef.current.material as THREE.ShaderMaterial;
-      material.uniforms.uTime.value = state.clock.getElapsedTime();
+      if (material.uniforms.uTime) {
+        material.uniforms.uTime.value = state.clock.getElapsedTime();
+      }
       
-      // Smoothly track mouse
-      const targetX = (state.mouse.x + 1) / 2;
-      const targetY = (state.mouse.y + 1) / 2;
-      material.uniforms.uMouse.value.x += (targetX - material.uniforms.uMouse.value.x) * 0.05;
-      material.uniforms.uMouse.value.y += (targetY - material.uniforms.uMouse.value.y) * 0.05;
+      if (material.uniforms.uMouse) {
+        // Smoothly track mouse
+        const targetX = (state.mouse.x + 1) / 2;
+        const targetY = (state.mouse.y + 1) / 2;
+        material.uniforms.uMouse.value.x += (targetX - material.uniforms.uMouse.value.x) * 0.05;
+        material.uniforms.uMouse.value.y += (targetY - material.uniforms.uMouse.value.y) * 0.05;
+      }
     }
   });
 

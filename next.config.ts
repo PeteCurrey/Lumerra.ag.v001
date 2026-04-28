@@ -14,6 +14,7 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ["lucide-react", "framer-motion", "@radix-ui/react-accordion"],
   },
+  serverExternalPackages: ["gltf-pipeline", "cesium"],
 };
 
 export default nextConfig;

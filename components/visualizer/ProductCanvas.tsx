@@ -34,7 +34,7 @@ function ProductModel({ url }: { url: string }) {
   const [error, setError] = useState(false);
   
   // Try to load the GLTF, catch errors to prevent whole scene crash
-  let scene;
+  let scene: THREE.Group | undefined;
   try {
     const gltf = useGLTF(url, true);
     scene = gltf.scene;
@@ -152,7 +152,7 @@ export function ProductCanvas({
             makeDefault
           />
 
-          <EffectComposer disableNormalPass>
+          <EffectComposer enableNormalPass={false}>
             <SSAO intensity={0.4} radius={0.04} />
             <Bloom intensity={0.12} luminanceThreshold={0.8} />
             <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />

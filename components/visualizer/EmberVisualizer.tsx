@@ -12,15 +12,10 @@ import {
   useGLTF
 } from '@react-three/drei';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Module, ModuleType } from '@/lib/types';
 import * as THREE from 'three';
 
-interface Module {
-  id: string;
-  type: 'grill' | 'prep' | 'fridge' | 'sink' | 'storage';
-  position: number; // 0, 1, 2, etc.
-}
-
-function KitchenModule({ type, position }: { type: string, position: number }) {
+function KitchenModule({ type, position }: { type: ModuleType, position: number }) {
   // In a real scenario, we'd load different GLBs based on type
   // For now, we simulate with a box primitive
   const meshRef = useRef<THREE.Mesh>(null);

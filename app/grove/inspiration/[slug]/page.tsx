@@ -3,14 +3,20 @@ import Image from 'next/image';
 import { ChevronLeft, Maximize, Share, MapPin, Trees } from 'lucide-react';
 import Link from 'next/link';
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+type Props = {
+  params: Promise<{ slug: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
   return {
-    title: `Inspiration: ${params.slug.replace('-', ' ')} | Grove`,
+    title: `Inspiration: ${slug.replace('-', ' ')} | Grove`,
     description: 'Cinematic garden room projects and architectural sanctuaries.',
   };
 }
 
-export default function InspirationPage({ params }: { params: { slug: string } }) {
+export default async function InspirationPage({ params }: Props) {
+  const { slug } = await params;
   return (
     <article className="bg-forest-wash text-forest min-h-screen">
       {/* Immersive Header */}

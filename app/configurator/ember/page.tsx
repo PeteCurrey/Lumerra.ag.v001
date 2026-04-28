@@ -7,18 +7,14 @@ import { motion } from 'framer-motion';
 import { ChevronLeft, Share2, Download, Save } from 'lucide-react';
 import Link from 'next/link';
 
-interface Module {
-  id: string;
-  type: string;
-  position: number;
-}
+import { Module, ModuleType } from '@/lib/types';
 
 export default function EmberConfigurator() {
   const [modules, setModules] = useState<Module[]>([
     { id: '1', type: 'grill', position: 0 }
   ]);
 
-  const addModule = (type: string) => {
+  const addModule = (type: ModuleType) => {
     const newModule = {
       id: Math.random().toString(36).substr(2, 9),
       type,

@@ -3,14 +3,20 @@ import Image from 'next/image';
 import { ChevronLeft, Share2, BookOpen, Clock } from 'lucide-react';
 import Link from 'next/link';
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+type Props = {
+  params: Promise<{ slug: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
   return {
-    title: `Guide: ${params.slug.replace('-', ' ')} | Ember`,
+    title: `Guide: ${slug.replace('-', ' ')} | Ember`,
     description: 'Mastering the art of outdoor living and culinary architecture.',
   };
 }
 
-export default function GuidePage({ params }: { params: { slug: string } }) {
+export default async function GuidePage({ params }: Props) {
+  const { slug } = await params;
   return (
     <article className="bg-charcoal text-white min-h-screen">
       {/* Editorial Header */}

@@ -43,7 +43,9 @@ function WaterShader() {
   useFrame((state) => {
     if (meshRef.current) {
       const material = meshRef.current.material as THREE.ShaderMaterial;
-      material.uniforms.uTime.value = state.clock.getElapsedTime();
+      if (material.uniforms.uTime) {
+        material.uniforms.uTime.value = state.clock.getElapsedTime();
+      }
     }
   });
 
